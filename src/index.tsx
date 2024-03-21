@@ -14,7 +14,7 @@ import { FaSave } from "react-icons/fa";
 import { FiEdit3 } from "react-icons/fi";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import ConfigurePathsPage from "./pages/ConfigurePathsPage";
-import { getCloudBackend, syncNow } from "./apiClient";
+import { getCloudBackend, syncNow, syncNowAndSuspend } from "./apiClient";
 import Head from "./components/Head";
 import ConfigureBackendPage from "./pages/ConfigureBackendPage";
 import DeckyStoreButton from "./components/DeckyStoreButton";
@@ -51,6 +51,12 @@ const Content: VFC<{}> = () => {
         <PanelSectionRow>
           <ButtonItem layout="below" disabled={appState.syncing === "true" || !hasProvider} onClick={() => syncNow(true)}>
             <DeckyStoreButton icon={<FaSave className={appState.syncing === "true" ? "dcs-rotate" : ""} />}>Sync Now</DeckyStoreButton>
+          </ButtonItem>
+          {hasProvider === false && <small>Cloud Storage Provider is not configured. Please configure it in 'Cloud Provider'.</small>}
+        </PanelSectionRow>
+        <PanelSectionRow>
+          <ButtonItem layout="below" disabled={appState.syncing === "true" || !hasProvider} onClick={() => syncNowAndSuspend(true)}>
+            <DeckyStoreButton icon={<FaSave className={appState.syncing === "true" ? "dcs-rotate" : ""} />}>Sync Now & Suspend</DeckyStoreButton>
           </ButtonItem>
           {hasProvider === false && <small>Cloud Storage Provider is not configured. Please configure it in 'Cloud Provider'.</small>}
         </PanelSectionRow>

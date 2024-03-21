@@ -1,3 +1,20 @@
+# This repository is a fork to add just one function: "Sync now & suspend"
+When you want to keep your game open, but sync the save game before suspending the system, you can use this fork of the plugin to get an additional button that does just that. As suspending the system is a root action, some manual setup is required, which is described below. This is also the reason why it will never be merged to the original plugin.
+
+To bring the plugin to your steam deck, setup the dev environment and use the VSCode tasks to build and deploy the app.
+A very good description on how to do this can be found here in the Readme: https://github.com/XanderXAJ/ryzenadj-decky-plugin
+
+This enhancement needs some manual setup, the deck user needs to be able to suspend the system without using a password for "sudo", for this, do the following in a terminal:
+```
+cd /home/deck
+echo 'systemctl suspend' > suspend.sh
+chmod 0700 suspend.sh
+sudo chown root:root suspend.sh
+sudo mv suspend.sh /root/suspend.sh
+sudo nano /etc/sudoers
+add line at the end: deck ALL=(root) NOPASSWD: /root/suspend.sh
+```
+
 # Decky Cloud Save
 
 A plugin based on [rclone](https://rclone.org/), which allows users to back-up game saves to the cloud. Supports [OneDrive](https://onedrive.live.com/), [Google Drive](https://drive.google.com/), [Dropbox](https://www.dropbox.com/), and [many more](#backend-support)!

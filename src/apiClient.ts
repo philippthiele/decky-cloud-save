@@ -45,6 +45,11 @@ export async function syncNow(toast: boolean): Promise<void> {
   }
 }
 
+export async function syncNowAndSuspend(toast: boolean): Promise<void> {
+  await syncNow(toast);
+  await getServerApi().callPluginMethod("suspend", {});
+}
+
 export async function getCloudBackend(): Promise<string | undefined> {
   const e = await getServerApi().callPluginMethod<{}, string>("get_backend_type", {});
   if (e.success) {

@@ -17,7 +17,7 @@ cfg_syncpath_filter_file = config_dir / "sync_paths_filter.txt"
 cfg_property_file = config_dir / "plugin.properties"
 
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 
 async def _get_url_from_rclone_process(process: asyncio.subprocess.Process):
@@ -260,3 +260,7 @@ class Plugin:
     # Function called first during the unload process, utilize this to handle your plugin being removed
     async def _unload(self):
         await _kill_previous_spawn(self.current_spawn)  # Kills only if exists
+
+    async def suspend(self):
+        logger.debug("Executing: suspend()")
+        logger.debug(subprocess.check_output(["sudo", "/root/suspend.sh"]))
