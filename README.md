@@ -4,6 +4,15 @@ When you want to keep your game open, but sync the save game before suspending t
 To bring the plugin to your steam deck, setup the dev environment and use the VSCode tasks to build and deploy the app.
 A very good description on how to do this can be found here in the Readme: https://github.com/XanderXAJ/ryzenadj-decky-plugin
 
+Additionally, you need to put the rclone binary into the root of the project. E.g. set it up like this:
+```
+wget https://downloads.rclone.org/v1.65.1/rclone-v1.65.1-linux-amd64.zip
+unzip rclone-v1.65.1-linux-amd64.zip
+mv rclone-v1.65.1-linux-amd64/rclone .
+rm -r rclone-v1.65.1-linux-amd64
+rm rclone-v1.65.1-linux-amd64.zip
+```
+
 This enhancement needs some manual setup, the deck user needs to be able to suspend the system without using a password for "sudo", for this, do the following in a terminal:
 ```
 cd /home/deck
